@@ -2,6 +2,9 @@ package com.lima.GerenciamentoDePlanos.user.infrastructure.persistence.entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "roles")
 public class RoleJpaEntity {
@@ -10,6 +13,8 @@ public class RoleJpaEntity {
     @Column(name = "role_id")
     private Long id;
     private String name;
+//    @ManyToMany(mappedBy = "roles")
+//    private Set<UserJpaEntity> users = new HashSet<>();
 
     public enum Values {
 
@@ -27,9 +32,11 @@ public class RoleJpaEntity {
         }
     }
     public  RoleJpaEntity() {}
+
     public RoleJpaEntity(Long id, String name) {
         this.id = id;
         this.name = name;
+//        this.users = users;
     }
 
     public Long getId() {
@@ -47,4 +54,12 @@ public class RoleJpaEntity {
     public void setName(String name) {
         this.name = name;
     }
+
+//    public Set<UserJpaEntity> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(Set<UserJpaEntity> users) {
+//        this.users = users;
+//    }
 }

@@ -1,5 +1,8 @@
 package com.lima.GerenciamentoDePlanos.user.domain.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Role {
     private final Long id;
     private String name;
@@ -36,4 +39,5 @@ public class Role {
     public void setName(String name) {
         this.name = name;
     }
+
 }
