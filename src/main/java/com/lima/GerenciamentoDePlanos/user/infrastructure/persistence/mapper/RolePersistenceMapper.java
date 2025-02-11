@@ -13,7 +13,6 @@ public class RolePersistenceMapper {
                 domain.getName()
         );
     }
-
     public Role toDomain(RoleJpaEntity jpaEntity) {
         return new Role(
                 jpaEntity.getId(),
