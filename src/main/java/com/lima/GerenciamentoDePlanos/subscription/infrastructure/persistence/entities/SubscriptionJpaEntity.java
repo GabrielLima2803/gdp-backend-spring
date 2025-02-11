@@ -1,5 +1,6 @@
 package com.lima.GerenciamentoDePlanos.subscription.infrastructure.persistence.entities;
 
+import com.lima.GerenciamentoDePlanos.payment.infrastructure.persistence.entities.PaymentJpaEntity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -7,6 +8,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -25,6 +28,8 @@ public class SubscriptionJpaEntity {
     private LocalDateTime createdAt;
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+    @OneToMany(mappedBy = "subscription", cascade = CascadeType.ALL)
+    private Set<PaymentJpaEntity> payments = new HashSet<>();
 
     public SubscriptionJpaEntity() {
     }
