@@ -1,12 +1,26 @@
+version: '3.8'
+
 services:
   mysql:
-    image: mysql
+    image: mysql:8
     ports:
       - "3306:3306"
-    expose:
-      - "3306"
     environment:
-      - MYSQL_USER=admin
-      - MYSQL_PASSWORD=123
-      - MYSQL_DATABASE=spring
-      - MYSQL_ROOT_PASSWORD=123
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: "123"
+      MYSQL_DATABASE: spring
+      MYSQL_ROOT_PASSWORD: "123"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"   # Porta para comunicação das aplicações
+      - "15672:15672" # Porta para acessar a interface de gerenciamento
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+volumes:
+  mysql-data:
