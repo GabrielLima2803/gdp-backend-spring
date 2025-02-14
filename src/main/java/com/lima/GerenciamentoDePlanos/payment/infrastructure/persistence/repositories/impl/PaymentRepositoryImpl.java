@@ -34,7 +34,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
     }
     @Override
     public Optional<Payment> findByUserId(UUID id) {
-        return jpaRepository.findByUser(id)
+        return jpaRepository.findByUserId(id)
                 .map(mapper::toDomain);
     }
     @Override
