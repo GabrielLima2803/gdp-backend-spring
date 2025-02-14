@@ -3,6 +3,7 @@ version: '3.8'
 services:
   mysql:
     image: mysql:8
+    container_name: mysql-db
     ports:
       - "3306:3306"
     environment:
@@ -12,15 +13,29 @@ services:
       MYSQL_ROOT_PASSWORD: "123"
     volumes:
       - mysql-data:/var/lib/mysql
+    networks:
+      - backend-network
 
   rabbitmq:
     image: rabbitmq:management
+    container_name: rabbitmq-server
     ports:
-      - "5672:5672"   # Porta para comunicação das aplicações
-      - "15672:15672" # Porta para acessar a interface de gerenciamento
+      - "5672:5672"
+      - "15672:15672"
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
+      RABBITMQ_DEFAULT_VHOST: "/"
+      RABBITMQ_ALLOW_RUNAS: "true"
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    networks:
+      - backend-network
 
 volumes:
   mysql-data:
+  rabbitmq-data:
+
+networks:
+  backend-network:
+    driver: bridge
