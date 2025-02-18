@@ -1,5 +1,6 @@
 package com.lima.GerenciamentoDePlanos.user.domain.models;
 
+import com.lima.GerenciamentoDePlanos.subscription.domain.models.Subscription;
 import com.lima.GerenciamentoDePlanos.user.domain.emuns.UserStatus;
 import com.lima.GerenciamentoDePlanos.user.infrastructure.persistence.entities.UserJpaEntity;
 
@@ -16,9 +17,10 @@ public class User {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private UserStatus status = UserStatus.ACTIVE;
+    private Subscription selectSubscription;
     private Set<Role> roles = new HashSet<>();
 
-    public User(UUID id, String username, String email, String password, LocalDateTime createdAt, LocalDateTime updatedAt, UserStatus status, Set<Role> roles) {
+    public User(UUID id, String username, String email, String password, LocalDateTime createdAt, LocalDateTime updatedAt, Subscription selectSubscription, UserStatus status, Set<Role> roles) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -26,6 +28,7 @@ public class User {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.status = status;
+        this.selectSubscription = selectSubscription;
         this.roles = roles;
     }
 
@@ -87,5 +90,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Subscription getSelectSubscription() {
+        return selectSubscription;
+    }
+
+    public void setSelectSubscription(Subscription selectSubscription) {
+        this.selectSubscription = selectSubscription;
     }
 }
