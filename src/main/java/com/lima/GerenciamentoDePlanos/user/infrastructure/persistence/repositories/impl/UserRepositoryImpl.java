@@ -48,7 +48,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public List<User> findBySubscription(Subscription subscription) {
         SubscriptionJpaEntity subscriptionJpaEntity = subscriptionPersistenceMapper.toJpaEntity(subscription);
-        return userJpaRepository.findBySubscription(subscriptionJpaEntity)
+        return userJpaRepository.findBySelectSubscription(subscriptionJpaEntity)
                 .stream()
                 .map(mapper::toDomain)
                 .toList();
