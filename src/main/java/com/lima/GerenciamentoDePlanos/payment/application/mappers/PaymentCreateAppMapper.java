@@ -10,7 +10,7 @@ public class PaymentCreateAppMapper {
 
     public PaymentResponseDTO toResponseDTO(Payment entity) {
         return  new PaymentResponseDTO(
-                null,
+                entity.getId(),
                 entity.getUser().getId(),
                 entity.getSubscription().getId(),
                 entity.getAmount(),
