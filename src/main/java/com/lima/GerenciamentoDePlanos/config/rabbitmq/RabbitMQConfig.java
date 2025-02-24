@@ -15,18 +15,15 @@ import org.springframework.context.annotation.Configuration;
 @EnableRabbit
 public class RabbitMQConfig {
 
-    // Nomes centralizados
     public static final String QUEUE_NAME = "notification_queue";
     public static final String EXCHANGE_NAME = "notification_exchange";
     public static final String ROUTING_KEY = "notification_routing_key";
     public static final String DLQ_NAME = "notification_dlq";
 
-    // Fila principal
     @Bean
     public Queue notificationQueue() {
         return new Queue(QUEUE_NAME, true, false, false);
     }
-    // Dead Letter Queue
     @Bean
     public Queue dlq() {
         return new Queue(DLQ_NAME, true, false, false);
@@ -38,7 +35,6 @@ public class RabbitMQConfig {
         return new DirectExchange(EXCHANGE_NAME, true, false);
     }
 
-    // Binding principal
     @Bean
     public Binding bindingNotificationQueue() {
         return BindingBuilder.bind(notificationQueue())
@@ -46,23 +42,20 @@ public class RabbitMQConfig {
                 .with(ROUTING_KEY);
     }
 
-    // Configuração do Message Converter
     @Bean
     public MessageConverter jsonMessageConverter() {
         return new Jackson2JsonMessageConverter();
     }
 
-    // RabbitTemplate corrigido
     @Bean
     public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory, MessageConverter converter) {
         RabbitTemplate template = new RabbitTemplate(connectionFactory);
         template.setMessageConverter(converter);
-        template.setExchange(EXCHANGE_NAME); // Usa a exchange correta
-        template.setRoutingKey(ROUTING_KEY); // Usa a routing key definida
+        template.setExchange(EXCHANGE_NAME);
+        template.setRoutingKey(ROUTING_KEY);
         return template;
     }
 
-    // Configuração do Listener
     @Bean
     public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(ConnectionFactory connectionFactory) {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
