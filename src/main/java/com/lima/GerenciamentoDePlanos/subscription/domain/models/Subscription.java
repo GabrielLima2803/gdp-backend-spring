@@ -10,7 +10,7 @@ public class Subscription {
     private String description;
     private Integer durationMonths;
     private LocalDateTime createdAt;
-    private boolean active = true;
+    private Boolean active = true;
     private LocalDateTime expirationDate;
     private LocalDateTime updatedAt;
 
@@ -92,15 +92,15 @@ public class Subscription {
         this.expirationDate = expirationDate;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return active;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         this.active = active;
     }
 
-    public boolean isValidSubscription() {
+    public Boolean isValidSubscription() {
         return LocalDateTime.now().isBefore(createdAt.plusMonths(durationMonths));
     }
 }

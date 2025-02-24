@@ -35,7 +35,7 @@ public class SubscriptionJpaEntity {
     @Column(name = "expiration_date")
     private LocalDateTime expirationDate;
     @Column(name = "is_active")
-    private boolean active = true;
+    private Boolean active = true;
     @OneToMany(mappedBy = "subscription", cascade = CascadeType.ALL)
     private Set<PaymentJpaEntity> payments = new HashSet<>();
 
@@ -121,10 +121,10 @@ public class SubscriptionJpaEntity {
         }
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return active;
     }
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         this.active = active;
     }
 
