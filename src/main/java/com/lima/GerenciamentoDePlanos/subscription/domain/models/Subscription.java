@@ -10,6 +10,8 @@ public class Subscription {
     private String description;
     private Integer durationMonths;
     private LocalDateTime createdAt;
+    private boolean active = true;
+    private LocalDateTime expirationDate;
     private LocalDateTime updatedAt;
 
     public Subscription(Long id, String name, BigDecimal price, String description, Integer durationMonths, LocalDateTime createdAt, LocalDateTime updatedAt) {
@@ -80,6 +82,22 @@ public class Subscription {
         this.description = description;
         this.durationMonths = durationMonths;
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public LocalDateTime getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(LocalDateTime expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public boolean isValidSubscription() {
