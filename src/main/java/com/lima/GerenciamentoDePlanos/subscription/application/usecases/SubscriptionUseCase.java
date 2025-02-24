@@ -27,6 +27,28 @@ public class SubscriptionUseCase {
                 .orElseThrow(() -> new IllegalArgumentException("Subscription not found"));
     }
 
+    public void deleteSubscription(Long id) {
+        Subscription subscription = subscriptionRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Subscription not found"));
+        subscriptionRepository.delete(subscription);
+
+    }
+
+     public Subscription updateSubscriptin(Long id, Subscription subscription) {
+         if (subscription.getName() == null || subscription.getName().isBlank()) {
+             throw new IllegalArgumentException("Subscription name is required");
+         }
+
+         Subscription existingSubscription = subscriptionRepository.findById(id)
+                 .orElseThrow(() -> new IllegalArgumentException("Subscription not found"));
+
+         existingSubscription.setName(subscription.getName());
+         existingSubscription.setPrice(subscription.getPrice());
+         existingSubscription.setDescription(subscription.getDescription());
+         existingSubscription.setDurationMonths(subscription.getDurationMonths());
+         return subscriptionRepository.save(existingSubscription);
+
+    }
     public List<Subscription> getAllSubscriptions() {
         return subscriptionRepository.findAll();
     }
