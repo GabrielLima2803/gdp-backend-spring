@@ -14,4 +14,6 @@ public interface SubscriptionJpaRepository extends JpaRepository<SubscriptionJpa
     @Query("SELECT s FROM SubscriptionJpaEntity s WHERE s.active = true AND s.expirationDate < :now")
     List<SubscriptionJpaEntity> findExpiredSubscriptions(@Param("now") LocalDateTime now);
 
+    List<SubscriptionJpaEntity> findByExpirationDateBetween(LocalDateTime start, LocalDateTime end);
+
 }

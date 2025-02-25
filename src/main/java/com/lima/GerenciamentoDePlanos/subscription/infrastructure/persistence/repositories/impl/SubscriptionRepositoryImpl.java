@@ -52,6 +52,13 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepository {
                 .map(mapper::toDomain)
                 .toList();
     }
+
+    public List<Subscription> findByExpirationDateBetween(LocalDateTime start, LocalDateTime end) {
+        return jpaRepository.findByExpirationDateBetween(start, end)
+                .stream()
+                .map(mapper::toDomain)
+                .toList();
+    }
     public void delete(Subscription subscription) {
         jpaRepository.delete(mapper.toJpaEntity(subscription));
     }

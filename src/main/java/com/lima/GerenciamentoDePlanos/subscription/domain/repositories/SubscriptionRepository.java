@@ -15,6 +15,7 @@ public interface SubscriptionRepository {
     List<Subscription> findAll();
     List<Subscription> findByExpirationDateBeforeAndActiveTrue(LocalDateTime date);
     List<Subscription> findExpiredSubscriptions(LocalDateTime now);
+    List<Subscription> findByExpirationDateBetween(LocalDateTime start, LocalDateTime end);
 
     void delete(Subscription subscription);
 
