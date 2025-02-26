@@ -34,4 +34,16 @@ public class SubscriptionController {
     public ResponseEntity<List<Subscription>> getAllSubscriptions() {
         return ResponseEntity.ok(subscriptionUseCase.getAllSubscriptions());
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteSubscription(@PathVariable Long id) {
+        subscriptionUseCase.deleteSubscription(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Subscription> updateSubscription(@PathVariable Long id, @RequestBody @Valid SubscriptionInputDTO input) {
+        Subscription subscription = appMapper.toDomain(input);
+        Subscription updated = subscriptionUseCase.updateSubscriptin(id, subscription);
+        return ResponseEntity.ok(updated);
+    }
 }

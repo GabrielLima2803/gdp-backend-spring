@@ -1,6 +1,7 @@
 package com.lima.GerenciamentoDePlanos.subscription.infrastructure.persistence.entities;
 
 import com.lima.GerenciamentoDePlanos.payment.infrastructure.persistence.entities.PaymentJpaEntity;
+import com.lima.GerenciamentoDePlanos.user.infrastructure.persistence.entities.UserJpaEntity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -23,11 +24,18 @@ public class SubscriptionJpaEntity {
     private String name;
     private BigDecimal price;
     private String description;
+    @Column(name = "duration_months")
     private Integer durationMonths;
+    @Column(name = "created_at")
     @CreationTimestamp
     private LocalDateTime createdAt;
+    @Column(name = "updated_at")
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+    @Column(name = "expiration_date")
+    private LocalDateTime expirationDate;
+    @Column(name = "is_active")
+    private Boolean active = true;
     @OneToMany(mappedBy = "subscription", cascade = CascadeType.ALL)
     private Set<PaymentJpaEntity> payments = new HashSet<>();
 
@@ -95,6 +103,29 @@ public class SubscriptionJpaEntity {
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public LocalDateTime getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(LocalDateTime expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    @PrePersist
+    @PreUpdate
+    private void  calculateExpirationDate() {
+        if (durationMonths != null && createdAt != null) {
+            this.expirationDate = createdAt.plusMonths(durationMonths);
+        }
+    }
+
+    public Boolean isActive() {
+        return active;
+    }
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public void setUpdatedAt(LocalDateTime updatedAt) {

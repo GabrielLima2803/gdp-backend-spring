@@ -75,8 +75,8 @@ public class UserUseCase {
                .collect(Collectors.joining(" "));
 
         JwtClaimsSet claims = JwtClaimsSet.builder()
-                .issuer("mydb")
-                .subject(user.getId().toString())
+                .issuer("spring")
+                .subject(user.getEmail())
                 .issuedAt(now)
                 .expiresAt(now.plusSeconds(expiresIn))
                 .claim("scopes", scopes)

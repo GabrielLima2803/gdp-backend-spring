@@ -20,4 +20,5 @@ public class SubscriptionAppMapper {
                 LocalDateTime.now()
         );
     }
+
 }

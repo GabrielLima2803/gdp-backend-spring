@@ -33,9 +33,18 @@ public class PaymentRepositoryImpl implements PaymentRepository {
                 .map(mapper::toDomain);
     }
     @Override
-    public Optional<Payment> findByUserId(UUID id) {
-        return jpaRepository.findByUser(id)
-                .map(mapper::toDomain);
+    public List<Payment> findByUserId(UUID id) {
+        return jpaRepository.findByUserId(id)
+                .stream()
+                .map(mapper::toDomain)
+                .toList();
+    }
+    @Override
+    public List<Payment> findByUserEmail(String email) {
+        return jpaRepository.findByUserEmail(email)
+                .stream()
+                .map(mapper::toDomain)
+                .toList();
     }
     @Override
     public List<Payment> findAll() {
@@ -44,4 +53,6 @@ public class PaymentRepositoryImpl implements PaymentRepository {
                 .map(mapper::toDomain)
                 .toList();
     }
+
+
 }

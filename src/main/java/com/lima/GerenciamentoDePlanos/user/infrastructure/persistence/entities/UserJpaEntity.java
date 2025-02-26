@@ -1,6 +1,7 @@
 package com.lima.GerenciamentoDePlanos.user.infrastructure.persistence.entities;
 
 import com.lima.GerenciamentoDePlanos.payment.infrastructure.persistence.entities.PaymentJpaEntity;
+import com.lima.GerenciamentoDePlanos.subscription.infrastructure.persistence.entities.SubscriptionJpaEntity;
 import com.lima.GerenciamentoDePlanos.user.domain.emuns.UserStatus;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -50,12 +51,16 @@ public class UserJpaEntity {
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<RoleJpaEntity> roles = new HashSet<>();
 
+    @ManyToOne
+    @JoinColumn(name = "subscription_id", nullable = true)
+    private SubscriptionJpaEntity selectSubscription;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<PaymentJpaEntity> payments = new HashSet<>();
 
     public UserJpaEntity() {}
 
-    public UserJpaEntity(UUID id, String username, String email, String password, UserStatus status, LocalDateTime createdAt, LocalDateTime updatedAt, Set<RoleJpaEntity> roles) {
+    public UserJpaEntity(UUID id, String username, String email, String password, UserStatus status, LocalDateTime createdAt, LocalDateTime updatedAt, SubscriptionJpaEntity selectSubscription, Set<RoleJpaEntity> roles) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -63,6 +68,7 @@ public class UserJpaEntity {
         this.status = status;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.selectSubscription = selectSubscription;
         this.roles = roles;
     }
 
@@ -128,5 +134,13 @@ public class UserJpaEntity {
 
     public void setRoles(Set<RoleJpaEntity> roles) {
         this.roles = roles;
+    }
+
+    public SubscriptionJpaEntity getSelectSubscription() {
+        return selectSubscription;
+    }
+
+    public void setSelectSubscription(SubscriptionJpaEntity selectSubscription) {
+        this.selectSubscription = selectSubscription;
     }
 }

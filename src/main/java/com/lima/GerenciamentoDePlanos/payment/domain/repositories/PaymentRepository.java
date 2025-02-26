@@ -10,7 +10,8 @@ public interface PaymentRepository {
     Payment save(Payment payment);
 
     Optional<Payment> findById(Long id);
-    Optional<Payment> findByUserId(UUID id);
+    List<Payment> findByUserId(UUID id);
+    List<Payment> findByUserEmail(String email);
 
     List<Payment> findAll();
 }
