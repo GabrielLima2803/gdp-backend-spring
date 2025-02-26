@@ -2,6 +2,17 @@
 
 Este projeto é uma API para gerenciamento de planos, desenvolvida utilizando **Spring Boot**, **Spring Security**, **RabbitMQ**, **JWT** e **Swagger**. O software foi implementado seguindo os princípios do **Domain Driven Design (DDD)**, proporcionando uma arquitetura modular, organizada e de fácil manutenção.
 
+## Demonstrações
+
+### RabbitMQ
+
+![Demonstração do RabbitMQ](docs/rabbitmq-GdP.gif)
+
+### Swagger com RabbitMQ
+
+![Demonstração do Swagger com RabbitMQ](docs/demostracao-gdp.gif)
+
+
 ## Sumário
 
 - [Visão Geral](#visão-geral)
@@ -22,7 +33,7 @@ Este projeto é uma API para gerenciamento de planos, desenvolvida utilizando **
 
 ## Visão Geral
 
-A **Gerenciamento de Planos API** oferece funcionalidades para criação, leitura, atualização (total ou parcial) e exclusão de planos de assinatura. A aplicação foi estruturada utilizando os conceitos do DDD, separando as responsabilidades entre as camadas de domínio, aplicação e infraestrutura.
+O projeto foi idealizado para treinar e consolidar diversos conceitos e práticas modernas de desenvolvimento de software. A **Gerenciamento de Planos API** oferece funcionalidades para criação, leitura, atualização (total ou parcial) e exclusão de planos de assinatura. A aplicação foi estruturada utilizando os conceitos do DDD (Domain Driven Design), separando as responsabilidades entre as camadas de domínio, aplicação e infraestrutura. Dessa forma, o projeto serve como um ambiente de aprendizado para aplicar técnicas de integração com mensageria (como o RabbitMQ), agendamento de tarefas, notificações automáticas e outros recursos importantes na construção de sistemas escaláveis e bem organizados.
 
 ## Funcionalidades
 
@@ -33,6 +44,7 @@ A **Gerenciamento de Planos API** oferece funcionalidades para criação, leitur
 - **Autenticação e Segurança:** Implementa autenticação via JWT e proteção de endpoints utilizando Spring Security.
 - **Comunicação Assíncrona:** Utiliza RabbitMQ para gerenciar mensagens entre serviços, facilitando integrações e notificações.
 - **Documentação Interativa:** A API é documentada com Swagger, permitindo testes e visualização interativa dos endpoints.
+- **Notificação automatica:** Utiliza RabbitMQ para enviar notificação de assinaturas expiradas para o cliente**
 
 ## Tecnologias Utilizadas
 
