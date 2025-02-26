@@ -12,6 +12,14 @@ Este projeto é uma API para gerenciamento de planos, desenvolvida utilizando **
 
 ![Demonstração do Swagger com RabbitMQ](docs/demostracao-gdp.gif)
 
+## Postman Collection
+
+Para facilitar os testes e a exploração da API, você pode utilizar a coleção do Postman disponível neste repositório.
+
+- **Link Público:**  
+  [Visualizar Coleção Postman](https://documenter.getpostman.com/view/29574069/2sAYdeNCdi)  
+  (Clique para abrir a coleção diretamente no Postman ou navegador, conforme as configurações do Postman.)
+
 
 ## Sumário
 
